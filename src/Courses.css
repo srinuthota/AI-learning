@@ -94,9 +94,33 @@
   gap: 1.5rem;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .user-email {
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.95rem;
+}
+
+.projects-portal-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ff9100 100%);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.projects-portal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
 }
 
 .logout-btn {
@@ -140,6 +164,28 @@
 .welcome-section p {
   font-size: 1.1rem;
   opacity: 0.9;
+}
+
+.projects-cta {
+  margin-top: 1.5rem;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 107, 107, 0.15);
+  border-left: 4px solid #ff6b6b;
+  border-radius: 8px;
+  font-size: 1rem !important;
+  display: inline-block;
+}
+
+.apply-link {
+  color: #ff6b6b;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.apply-link:hover {
+  text-decoration: underline;
+  opacity: 0.8;
 }
 
 @keyframes slideDown {

@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import './CourseLearning.css';
 import { auth } from './firebase';
 import { signOut } from 'firebase/auth';
+import { generatePDF } from './pdfGenerator';
+import { videosData } from './videosData';
 
-function CourseLearning({ courseId, user, onBack }) {
+function CourseLearning({ courseId, user, onBack, onStartQuiz }) {
   const [activeSection, setActiveSection] = useState('basics');
   const [expandedModule, setExpandedModule] = useState(0);
 
@@ -212,6 +214,19 @@ function CourseLearning({ courseId, user, onBack }) {
         >
           🧠 Theory & Concepts
         </button>
+        <button
+          className={`tab-btn ${activeSection === 'resources' ? 'active' : ''}`}
+          onClick={() => setActiveSection('resources')}
+        >
+          🎥 Video Resources
+        </button>
+        <button
+          className="download-pdf-btn"
+          onClick={() => generatePDF(courseId)}
+          title="Download course concepts as PDF"
+        >
+          📥 Download PDF
+        </button>
       </div>
 
       {/* Content */}
@@ -305,6 +320,47 @@ function CourseLearning({ courseId, user, onBack }) {
                   )}
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+
+        {activeSection === 'resources' && (
+          <div className="resources-section">
+            <h2>🎥 Learning Resources</h2>
+            <p className="resources-subtitle">Watch high-quality video tutorials to deepen your understanding</p>
+            
+            <div className="resources-grid">
+              {videosData[courseId] && videosData[courseId].map((resource, idx) => (
+                <div key={idx} className="resource-card">
+                  <div className="resource-video-placeholder">
+                    <div className="play-button">▶</div>
+                    <span className="duration">{resource.duration}</span>
+                  </div>
+                  
+                  <div className="resource-content">
+                    <h4>{resource.title}</h4>
+                    <p className="resource-instructor">👨‍🏫 {resource.instructor}</p>
+                    <p className="resource-description">{resource.description}</p>
+                    
+                    <button className="watch-btn">
+                      <span>▶ Watch Video</span>
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="completion-section">
+              <div className="completion-card">
+                <div className="completion-icon">✅</div>
+                <div className="completion-content">
+                  <h3>Ready to Test Your Knowledge?</h3>
+                  <p>You've completed all the learning materials. Take the assignment to verify your understanding and earn completion credit.</p>
+                  <button className="start-assignment-btn" onClick={onStartQuiz}>
+                    📝 Start Assignment & Assessment
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}

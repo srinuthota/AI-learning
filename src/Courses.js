@@ -3,7 +3,7 @@ import './Courses.css';
 import { auth } from './firebase';
 import { signOut } from 'firebase/auth';
 
-function Courses({ user, onEnroll }) {
+function Courses({ user, onEnroll, onNavigateProjects }) {
   const [enrolledCourses, setEnrolledCourses] = useState([]);
 
   const handleEnroll = (courseId) => {
@@ -49,7 +49,14 @@ function Courses({ user, onEnroll }) {
       <header className="courses-header">
         <div className="header-content">
           <h1>🤖 AI Courses Platform</h1>
-          <div className="user-info">
+          <div className="header-actions">
+            <button 
+              onClick={onNavigateProjects} 
+              className="projects-portal-btn"
+              title="Apply your skills to real-world projects"
+            >
+              🚀 Apply Skills
+            </button>
             <span className="user-email">{user.email}</span>
             <button onClick={handleLogout} className="logout-btn">Logout</button>
           </div>
@@ -61,6 +68,9 @@ function Courses({ user, onEnroll }) {
         <div className="welcome-section">
           <h2>Welcome to Your Learning Journey</h2>
           <p>Explore cutting-edge AI and robotics courses designed for the future</p>
+          <p className="projects-cta">
+            💡 <strong>Tip:</strong> After completing courses, visit the <span onClick={onNavigateProjects} className="apply-link">Apply Skills</span> portal to work on real-world projects!
+          </p>
         </div>
 
         {/* Courses Grid */}

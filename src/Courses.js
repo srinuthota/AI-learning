@@ -3,12 +3,14 @@ import './Courses.css';
 import { auth } from './firebase';
 import { signOut } from 'firebase/auth';
 
-function Courses({ user }) {
+function Courses({ user, onEnroll }) {
   const [enrolledCourses, setEnrolledCourses] = useState([]);
 
   const handleEnroll = (courseId) => {
     if (!enrolledCourses.includes(courseId)) {
       setEnrolledCourses([...enrolledCourses, courseId]);
+      // Navigate to course learning page after enrolling
+      setTimeout(() => onEnroll(courseId), 500);
     }
   };
 
